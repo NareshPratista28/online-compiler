@@ -6,6 +6,6 @@ urlpatterns = [
     path('run', views.index, name='index'),
     path('test_files', views.get_test_file_list, name='get_test_file_list'),
     path('test_file/upload', views.upload_java_test_file, name='upload_java_test_file'),
-    path('test_file/delete', views.delete_test, name='delete_test_file')
-    # path('test_grade/get', views.get_test_grade, name='get_test_grade')
+    path('test_file/delete', views.delete_test, name='delete_test_file'),
+    path('generate/grade', views.generate_grade, name='generate_grade'),
 ]

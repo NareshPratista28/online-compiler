@@ -1,3 +1,6 @@
 django
 django-cors
 django-cors-headers
+transformers
+sentence_transformers
+PySastrawi
