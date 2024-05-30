@@ -4,3 +4,4 @@ django-cors-headers
 transformers
 sentence_transformers
 PySastrawi
+nltk
