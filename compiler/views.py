@@ -68,13 +68,7 @@ def delete_test(request):
 
 @csrf_exempt
 def generate_grade(request):
-
-    # Mean Pooling - Take attention mask into account for correct averaging
-    def mean_pooling(model_output, attention_mask):
-        token_embeddings = model_output.last_hidden_state
-        input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-        return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
-    
+  
     esay_answer = request.POST["esay_answer"]
     esay_answer2 = request.POST["esay_answer2"]
     esay_answer3 = request.POST["esay_answer3"]
@@ -160,6 +154,13 @@ def generate_grade(request):
     sentence4 = esay_answer3
     sentence5 = esay_answer4
 
+    # Mengubah kata menjadi huruf kecil
+    sentence1 = sentence1.lower()
+    sentence2 = sentence2.lower()
+    sentence3 = sentence3.lower()
+    sentence4 = sentence4.lower()
+    sentence5 = sentence5.lower()
+
     # Fungsi untuk menghapus tanda baca yang tidak penting
     def remove_punctuation(text):
         return re.sub(r'[^\w\s+=<>*&%-]', '', text)
@@ -170,14 +171,6 @@ def generate_grade(request):
     sentence3 = remove_punctuation(sentence3)
     sentence4 = remove_punctuation(sentence4)
     sentence5 = remove_punctuation(sentence5)
-
-
-    # Mengubah kata menjadi huruf kecil
-    sentence1 = sentence1.lower()
-    sentence2 = sentence2.lower()
-    sentence3 = sentence3.lower()
-    sentence4 = sentence4.lower()
-    sentence5 = sentence5.lower()
 
 
     # Menghapus kata tidak penting
@@ -243,6 +236,12 @@ def generate_grade(request):
         model_output4 = model(**encoded_input4)
         model_output5 = model(**encoded_input5)
 
+    # Mean Pooling - Take attention mask into account for correct averaging
+    def mean_pooling(model_output, attention_mask):
+        token_embeddings = model_output.last_hidden_state
+        input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+        return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+    
     # Perform pooling. In this case, average pooling
     sentence_embeddings1 = mean_pooling(model_output1, encoded_input1['attention_mask'])
     sentence_embeddings2 = mean_pooling(model_output2, encoded_input2['attention_mask'])

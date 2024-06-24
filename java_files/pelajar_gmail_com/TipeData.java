@@ -1,8 +1,8 @@
-package rossaakmalia66_gmail_com; 
+package pelajar_gmail_com; 
 
 public class TipeData {
       public static void main(String args[]) {
-            int  panjang, lebar, tinggi, vBalok, lBalok;
+             int panjang, lebar, tinggi, vBalok, lBalok;
              
              panjang = 10;
              lebar = 6;
