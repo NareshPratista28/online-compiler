@@ -294,6 +294,29 @@ def generate_grade(request):
     print(f"Cosine similarity {cosine_similarities}")   
     print(f"Max Cosine similarity {max_cosine_similarity_index}: { max_cosine_similarity}")
 
+
+    def normalize_cosine_similarity(cosine_similarity):
+        # Rentang awal dari cosine similarity (biasanya 0 sampai 1)
+        X_min = 0
+        X_max = 1
+        
+        # Rentang tujuan yang diinginkan
+        new_min = 0
+        new_max = 20
+        
+        # Menghitung nilai yang dinormalisasi
+        normalized_value = (max_cosine_similarity - X_min) / (X_max - X_min) * (new_max - new_min) + new_min
+        
+        # Bulatkan nilai yang sudah dinormalisasi
+        rounded_normalized_value = round(normalized_value)
+        
+        return rounded_normalized_value
+
+    normalized_value = normalize_cosine_similarity(max_cosine_similarity)
+
+    print(f"Nilai yang sudah dinormalisasi dan dibulatkan ke rentang [0, 20]: {normalized_value}")
+
+
     # def mae(y_true, predictions):
     #     y_true, predictions = np.array(y_true), np.array(predictions)
     #     return np.mean(np.abs(y_true - predictions))
@@ -355,5 +378,5 @@ def generate_grade(request):
 
     return JsonResponse({
         # 'output': cosine_scores[0][0].item()
-        'output': max_cosine_similarity
+        'output': normalized_value
     }, status=200)

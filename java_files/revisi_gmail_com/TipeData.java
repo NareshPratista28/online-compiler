@@ -1,4 +1,4 @@
-package pelajar_gmail_com; 
+package revisi_gmail_com; 
 
 public class TipeData {
 	public static void main(String args[]) {

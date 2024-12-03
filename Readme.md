@@ -5,25 +5,32 @@ this project using **django** and **python 3.x**.\
 **python 3.10** is recommended  
   
 ## First initialize project  
-1. make python virtual environment  
-   - in current project run `python -m venv venv`  
- - it will create `venv` folder in project  
+1. Clone project from github directory 
+   `git clone https://github.com/rsakml/onlinecompailer.git`
    
-2. run `source venv/bin/activate`  
-    in your terminal will look like\
-    `(venv) user@your_pc onlinecompiler %`  
-3. on `(venv)` mode, run `pip install -r requirements.txt`
+2. Create a virtual environment in the project folder
+   `python -m venv env`
+  
+3. Install in env folder
+   `pip install -r requirements.txt`
 
-all project dependency is located on `requirements.txt`  
-  
-## How to run project  
-  
-1. run `(venv)` mode with step number 2 on above.  
-2. on `(venv)` mode, run `python manage.py runserver` 
-it will serve on default port `8000`   
-## Exit venv mode  
-run `(venv) you@your_pc % deactivate`  
-  
+   all project dependency is located on `requirements.txt`  
+
+4. If Django is not installed, run the following command
+   `pip install django`
+
+
+Running Django Framework using Virtual Environment use this command:  
+`onlinecompiler> env\Scripts\activate`
+
+Virtual environment will be activate on command prompt if look like this:  
+`(env) onlinecompiler>`
+
+And run the python: 
+`(env) onlinecompiler>python manage.py runserver `
+it will serve on default port 8000.  
+    
+    
 ## API DOC  
   
 | URL                    | Description               | method | params | response |  
