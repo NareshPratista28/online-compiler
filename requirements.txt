@@ -1,7 +1,26 @@
 django
-django-cors
 django-cors-headers
 transformers
 sentence_transformers
 PySastrawi
 nltk
+
+# LLM Dependencies (migrated from FastAPI)
+langchain-community
+langchain-huggingface
+python-dotenv
+chromadb
+torch
+numpy
+scipy
+scikit-learn
+fastapi
+uvicorn
+pydantic
+
+# Database
+mysqlclient
+
+# Additional dependencies
+requests
+pathlib2

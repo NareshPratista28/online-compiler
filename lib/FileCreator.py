@@ -20,11 +20,10 @@ class FileCreator:
         dest_file = "{}/{}.java".format(des, self.filename)
 
         try:
-            f = open(dest_file, "w")
-            f.write("package {}; \n\n".format(self.package_name))
-            f.write(self.code)
-            f.close()
-
+            with open(dest_file, "w", encoding="utf-8") as f:
+                f.write("package {}; \n\n".format(self.package_name))
+                f.write(self.code)
+            return None  # Success case
         except OSError as err:
             print(err)
             return err
@@ -36,21 +35,17 @@ class FileCreator:
         test_filename = "JUnit{}Test".format(self.filename) # JUnitHelloWorldTest.java
         fdir = "java_files/test_cases/{}".format(test_filename)
 
-        test_file = open("{}.java.txt".format(fdir), "r+")
-        file_content = test_file.read()
-
-        # replace {{user_package}} as defined package
-        reg = "{{user_package}}"
-        final_content = re.sub(reg, string=file_content, repl=self.package_name)
-
-        test_file.close()
-
         try:
+            with open("{}.java.txt".format(fdir), "r+", encoding="utf-8") as test_file:
+                file_content = test_file.read()
+
+            # replace {{user_package}} as defined package
+            reg = "{{user_package}}"
+            final_content = re.sub(reg, string=file_content, repl=self.package_name)
+
             destination = "java_files/{0}/{1}.java".format(self.package_name, test_filename)
-            java_test_file = open(destination, "w")
-            java_test_file.write(final_content)
-            java_test_file.close()
+            with open(destination, "w", encoding="utf-8") as java_test_file:
+                java_test_file.write(final_content)
+                
         except OSError as e:
             print(e)
-
-
